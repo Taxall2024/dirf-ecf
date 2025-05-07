@@ -70,11 +70,13 @@ def process_dirf_file(uploaded_file):
                 return round(row['IRRF Retido (R$)'] / 9.45 * 1, 2)
             elif row['Código Rendimento'] in [8767]:
                 return round(row['IRRF Retido (R$)'] / 2.2 * 1, 2)
+            elif row['Código Rendimento'] in [6228, 4397]:
+                return round(row['IRRF Retido (R$)'] * 0.01, 2)
             else:
                 return 0.0
 
         def calc_ir(row, pis, cofins, cs):
-            if row['Código Rendimento'] in [1708, 3426, 5273, 5557, 6800, 8045, 5706]:
+            if row['Código Rendimento'] in [1708, 3426, 5273, 5557, 6800, 8045, 5706, 5928, 6256, 916, 1895]:
                 return round(row['IRRF Retido (R$)'], 2)
             elif row['Código Rendimento'] in [6147, 6175, 6190, 8767]:
                 return round(row['IRRF Retido (R$)'] - (pis + cofins + cs), 2)
